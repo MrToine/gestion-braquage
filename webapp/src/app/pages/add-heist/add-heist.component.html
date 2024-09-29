@@ -1,0 +1,24 @@
+<h1>Ajout d'un braquage</h1>
+<form [formGroup]="formGroup" (ngSubmit)="addHeist()">
+    <div class="form-row">
+        <div class="form-group">
+            <p-floatLabel>
+                <input formControlName="name" type="text" pInputText>
+                <label for="name">Nom du braquage</label>
+            </p-floatLabel>
+        </div>
+        <div class="form-group">
+            <p-floatLabel>
+                <input formControlName="cost" type="number" pInputText>
+                <label for="cost">Coût</label>
+            </p-floatLabel>
+        </div>
+        <div class="form-group">
+            <p-floatLabel>
+                <input formControlName="rewardMoney" type="number" pInputText>
+                <label for="rewardMoney">Récompense</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <button class="btn btn-success" [disabled]="!formGroup.valid">Ajouter le braquage</button>
+</form>

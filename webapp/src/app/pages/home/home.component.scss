@@ -1,0 +1,76 @@
+.post-card {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #145a2b;
+    border-radius: 4px;
+    background-color: #adbbb0;
+    color: #145a2b;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-card .logo i {
+    display: flex;
+    justify-content: flex-start;
+    right: 0;
+    margin-left: 10px;
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.post-card .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.post-card .content hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #e7e7e7;
+    border-color: #e7e7e7;
+}
+
+.post-card .date {
+    margin-right: 15px;
+}
+
+.post-card .date .date-info {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.post-card .date .dayMonth {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.post-card .date .year {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.post-card .message {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+textarea.edito {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #bce8f1;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #f7efd9;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

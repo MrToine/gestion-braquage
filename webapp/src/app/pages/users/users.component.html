@@ -1,0 +1,68 @@
+<div class="form" *ngIf="openFormHesists == true">
+    <h1>Ajouter un braquage au personnage</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="addHeistToUser()">
+        <p-dropdown 
+            formControlName="heists" 
+            [options]="heists"
+            optionLabel="name"
+            placeholder="Sélectionne un Braquage" />
+        <button class="btn btn-success" [disabled]="!formGroup.valid">Ajouter le braquage</button>
+    </form>
+</div>
+<div class="form" *ngIf="openFormUser == true">
+    <h1 *ngIf="selectedUser === currentUserId">Editer mes infos</h1>
+    <h1 *ngIf="selectedUser !== currentUserId && currentUserRole === 'admin'">Editer le rôle de l'utilisateur</h1>
+    <form [formGroup]="userFormGroup" (ngSubmit)="patchUser()">
+        <div *ngIf="selectedUser === currentUserId || currentUserRole !== 'admin'">
+            <label for="phoneNumber">Numero de téléphone sur l'île</label>
+            <input formControlName="phoneNumber" type="text" placeholder="Numéro de téléphone" />
+            <label for="biography">Mon Histoire</label>
+            <textarea formControlName="biography" placeholder="Biographie"></textarea>
+        </div>
+    </form>
+    <form [formGroup]="userRoleFormGroup" (ngSubmit)="patchUser()">
+        <div *ngIf="currentUserRole === 'admin' && selectedUser !== currentUserId">
+            <label for="role">Rôle</label>
+            <select formControlName="role">
+                <option value="user">Utilisateur</option>
+                <option value="admin">Administrateur</option>
+            </select>
+        </div>
+        <button class="btn btn-success" [disabled]="!userFormGroup.valid">Enregistrer</button>
+    </form>
+</div>
+<p-table [value]="users">
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="text-centered">Nbs Braquages</th>
+            <th style="width: 40%;">Membre</th>
+            <th class="text-centered">Dépense totale</th>
+            <th class="text-centered">Recette totale</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr [ngClass]="{'inactive-user': !user.isActive}">
+            <td class="text-centered">{{ user.totalHeists }}</td>
+            <td>{{ user.firstname }} {{ user.lastname }}</td>
+            <td class="text-centered">{{ user.totalRewards | numberFormat }}</td>
+            <td class="text-centered">{{ user.totalCosted | numberFormat }}</td>
+            <td>
+                <button *ngIf="currentUserId === user.id || currentUserRole === 'admin'" class="btn btn-warning" (click)="userEdit($event, user.id)"><i class="pi pi-pencil"></i></button>
+                
+                <button *ngIf="user.isActive && currentUserRole === 'admin'" (click)="confirmDeactivateUser($event, user.id)" class="btn btn-danger"><i class="pi pi-thumbs-down-fill"></i></button>
+                <button *ngIf="!user.isActive && currentUserRole === 'admin'" (click)="confirmActivateUser($event, user.id)" class="btn btn-success"><i class="pi pi-thumbs-up-fill"></i></button>
+                <button *ngIf="currentUserId === user.id" [disabled]="!user.isActive" (click)="userAddHeist(user.id)" class="btn btn-success"><i class="pi pi-plus"></i></button>
+                <button [disabled]="!user.isActive" class="btn btn-primary" (click)="userDetails(user.id)"><i class="pi pi-eye"></i></button>
+            </td>
+        </tr>
+        <tr class="details" *ngIf="selectedUser == user.id">
+            <td colspan="5">
+                <h2>{{ userDetail?.firstname }} {{ userDetail?.lastname }}</h2><hr>
+                <p><strong>Me joindre : </strong> {{ userDetail?.phoneNumber }}</p>
+                <p>{{ userDetail?.biography }}</p>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-confirmPopup />

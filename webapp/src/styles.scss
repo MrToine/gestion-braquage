@@ -1,0 +1,184 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.section {
+    display: flex;
+}
+
+.alert {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert .logo-info i {
+    margin-right: 10px;
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.alert .message {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.alert .message hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #e7e7e7;
+    border-color: #e7e7e7;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.p-toast-message {
+    font-family: 'Montserrat', sans-serif;
+    padding: 15px;
+}
+
+.p-toast-message-icon {
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.p-confirm-popup {
+    font-family: 'Montserrat', sans-serif;
+    padding: 15px;
+}
+
+.p-confirm-popup-icon {
+    margin-right: 10px;
+}
+
+.p-confirm-popup-content .pi-exclamation-triangle {
+    color: #f0ad4e;
+    font-size: 3rem;
+}
+
+.p-confirm-popup-content .pi-check-circle {
+    color: #249624;
+    font-size: 3rem;
+}
+
+.p-dialog-header, .p-dialog-content, .p-dialog-footer {
+    font-family: 'Montserrat', sans-serif;
+    padding: 15px;
+}
+
+.p-confirm-dialog-icon {
+    margin-right: 10px;
+}
+
+.p-button {
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+// Boutons
+.btn {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #7095b9;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #52759b;
+}
+
+.btn-danger {
+    background-color: #af5d5d;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #af3a3a;
+}
+
+.btn-success {
+    background-color: #5dab5d;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #3a8f3a;
+}
+
+.btn-warning {
+    background-color: #d9b15c;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #d9a23a;
+}
+
+.btn[disabled] {
+    background-color: #bebebe;
+    color: white;
+    cursor: not-allowed;
+}
+
+.txt {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    background: none;
+    font-size: 1rem;
+}
+
+.txt-warning {
+    color: #b39020;
+}

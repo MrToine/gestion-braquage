@@ -1,0 +1,27 @@
+<h1>Ajout d'un utilisateur</h1>
+<div *ngIf="userPassword != ''" class="alert alert-warning">
+    <div class="logo-info"><i class="pi pi-exclamation-triangle"></i></div>
+        <div class="message">
+            <h3>Attention</h3>
+            <p>Le mot de passe suivant à été généré aléatoirement. Notez le bien et conservez le !!</p>
+            <p><strong>Identifiant de connexion : </strong> {{ userLogin }}</p>
+            <p><strong>Mot de passe : </strong> {{ userPassword }}</p>
+        </div>
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="addUser()">
+    <div class="form-row">
+        <div class="form-group">
+            <p-floatLabel>
+                <input formControlName="firstname" type="text" pInputText>
+                <label for="firstname">Prénom</label>
+            </p-floatLabel>
+        </div>
+        <div class="form-group">
+            <p-floatLabel>
+                <input formControlName="lastname" type="text" pInputText>
+                <label for="cost">Nom de famille</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <button class="btn btn-success" [disabled]="!formGroup.valid">Ajouter l'utilisateur</button>
+</form>

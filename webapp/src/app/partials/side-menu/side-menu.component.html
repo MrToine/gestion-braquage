@@ -1,0 +1,24 @@
+<aside>
+    <img src="assets/logo.png">
+    <ul>
+        <li><a href="/"><i class="pi pi-home"></i> Accueil</a></li>
+        <li class="info-user">Bonjour, {{ username }}</li>
+        <li *ngIf="isLogged"><app-button-logout /></li>
+        <li *ngIf="!isLogged"><a href="/login"><i class="pi pi-sign-in"></i> Connexion</a></li>
+        <hr>
+        <li>
+            <a href="/users"><i class="pi pi-user"> Crew</i></a>
+            <ul>
+                <li><a href="/users">Liste des membres</a></li>
+                <li *ngIf="userRole === 'admin'"><a href="/users/add">Ajouter un membre</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/heists"><i class="pi pi-truck"> Braquages</i></a>
+            <ul>
+                <li><a href="/heists">Liste des Braquages</a></li>
+                <li *ngIf="userRole === 'admin'"><a routerLink="/heists/add">Ajouter braquage</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>

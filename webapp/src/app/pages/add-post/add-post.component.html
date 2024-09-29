@@ -1,0 +1,12 @@
+<h1>Créer un nouveau post</h1>
+<form [formGroup]="formGroup" (ngSubmit)="addPost()">
+    <div>
+        <label for="title">Titre</label>
+        <input id="title" formControlName="title" type="text" placeholder="Titre du post" />
+    </div>
+    <div>
+        <label for="content">Contenu</label>
+        <textarea id="content" formControlName="content" placeholder="Contenu du post"></textarea>
+    </div>
+    <button class="btn btn-success" [disabled]="!formGroup.valid">Créer le post</button>
+</form>

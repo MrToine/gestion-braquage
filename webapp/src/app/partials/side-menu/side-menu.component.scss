@@ -1,0 +1,92 @@
+aside {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    background-color: #1c1c1c;
+    color: #fff;
+    box-sizing: border-box;
+    flex-grow: 1;
+    height: 100%;
+}
+
+aside img {
+    width: 225px;
+    height: 291px;
+}
+
+aside a {
+    text-decoration: none;
+    color: #c53131;
+    transition: all 0.8s ease;
+}
+
+aside a:hover {
+    color: #dbcc43;
+}
+
+aside a.is-danger {
+    color: #f14668;
+}
+
+aside a.is-danger:hover {
+    color: #fa0435;
+}
+
+aside a.is-warning {
+    color: #f3b543;
+}
+
+aside a.is-warning:hover {
+    color: #ffc400;
+}
+
+aside ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    height: 100%;
+}
+
+aside ul li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-bottom: 1px solid #333;
+    position: relative;
+}
+
+aside ul li:hover {
+    background-color: #333;
+}
+
+aside ul li ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+aside ul li ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #e26161;
+}
+
+aside ul li:hover ul {
+    max-height: 200px;
+    opacity: 1;
+}
+
+aside ul li ul li:hover {
+    border-color: #e92929;
+}
+
+.info-user {
+    font-size: 0.8rem;
+}

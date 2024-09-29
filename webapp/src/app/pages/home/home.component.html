@@ -1,0 +1,65 @@
+<h1>Bienvenue sur l'application de gestion de Braquages</h1>
+<div *ngFor="let post of posts">
+    <div *ngIf="post.type === 'announce' && formEditPost && selectedPost.id === post.id" class="alert alert-info">
+        <div class="logo-info"><i class="pi pi-info-circle"></i></div>
+        <div class="message">
+            <div *ngIf="userRole === 'admin'" style="text-align: end;">
+                <button (click)="editPostForm($event, post)" class="btn btn-warning"><i class="pi pi-pencil"></i></button>
+            </div>
+            <h3>{{ post.title }}</h3>
+            <form [formGroup]="editPostFormGroup">
+                <textarea formControlName="content" placeholder="Contenu" class="edito"></textarea>
+                <button (click)="editPost($event, post)" class="btn btn-success">Enregistrer</button>
+            </form>
+            <hr>
+            <p style="font-style: italic;font-size: 0.8rem;">le {{ post.createdAt | date: 'dd/MM/yyyy' }}</p>
+        </div>
+    </div>
+    <div *ngIf="post.type === 'announce' && (!formEditPost || selectedPost.id !== post.id)" class="alert alert-info">
+        <div class="logo-info"><i class="pi pi-info-circle"></i></div>
+        <div class="message">
+            <div *ngIf="userRole === 'admin'" style="text-align: end;">
+                <button (click)="editPostForm($event, post)" class="btn btn-warning"><i class="pi pi-pencil"></i></button>
+            </div>
+            <h3>{{ post.title }}</h3>
+            <p>
+                {{ post.content }}
+            </p>
+            <hr>
+            <p style="font-style: italic;font-size: 0.8rem;">le {{ post.createdAt | date: 'dd/MM/yyyy' }}</p>
+        </div>
+    </div>
+</div>
+<h1>Les dernières infos</h1>
+<div *ngFor="let post of posts">
+    <div *ngIf="post.type !== 'announce' && formEditPost && selectedPost.id === post.id" class="post-card">
+        <div class="logo-info"><i class="pi pi-sparkles"></i></div>
+        <div class="message">
+            <div *ngIf="userRole === 'admin'" style="text-align: end;">
+                <button (click)="editPostForm($event, post)" class="btn btn-warning"><i class="pi pi-pencil"></i></button>
+            </div>
+            <h3>{{ post.title }}</h3>
+            <form [formGroup]="editPostFormGroup">
+                <textarea formControlName="content" placeholder="Contenu" class="edito"></textarea>
+                <button (click)="editPost($event, post)" class="btn btn-success">Enregistrer</button>
+            </form>
+            <hr>
+            <p style="font-style: italic;font-size: 0.8rem;">le {{ post.createdAt | date: 'dd/MM/yyyy' }}</p>
+        </div>
+    </div>
+    <div *ngIf="post.type !== 'announce' && (!formEditPost || selectedPost.id !== post.id)" class="post-card">
+        <div class="logo"><i class="pi pi-sparkles"></i></div>
+        <div class="message">
+            <div *ngIf="userRole === 'admin'" style="text-align: end;">
+                <button (click)="editPostForm($event, post)" class="btn btn-warning"><i class="pi pi-pencil"></i></button>
+            </div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+        </div>
+        <div class="date">
+            <p class="date-info">Le</p>
+            <p class="dayMonth">{{ post.createdAt | date: 'dd/MM' }}</p>
+            <p class="year">{{ post.createdAt | date: 'yyyy' }}</p>
+        </div>
+    </div>
+</div>
