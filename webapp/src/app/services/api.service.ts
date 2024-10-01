@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,11 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly API_URL = 'http://localhost:3000';
+  private readonly API_URL = 'http://univers-toine.org/api';
 
   constructor(
     private http: HttpClient
   ) { }
+
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer rezgfvz5efverggher5cfzef5ze4rfezfzec81efzer8gf4rez' // Remplacez par votre jeton d'authentification si nécessaire
+      })
+    };
+  }
 
   getAllUsers(): Observable<any> {
     return this.http.get(`${this.API_URL}/users`);
