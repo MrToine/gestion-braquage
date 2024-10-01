@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenService } from './token.service';
 
 
 interface User {
@@ -20,14 +21,27 @@ interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:3000';
+  private readonly API_URL = 'http://univers-toine.org/api';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
   private jwtHelper = new JwtHelperService();
-
-  constructor(private http: HttpClient) {
+  
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || 'null'));
     this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  private getHttpOptions() {
+    const token = this.tokenService.getToken();
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Utilisation du jeton dynamique
+      })
+    };
   }
 
   public get currentUserValue(): User | null {
@@ -35,7 +49,7 @@ export class AuthService {
   }
 
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${this.API_URL}/users/${credentials.login}`, credentials)
+    return this.http.post<any>(`${this.API_URL}/users/${credentials.login}`, credentials, this.getHttpOptions())
       .pipe(
         map(response => {
           if (response && response.token) {
@@ -44,6 +58,7 @@ export class AuthService {
               token: response.token
             };
             localStorage.setItem('currentUser', JSON.stringify(user));
+            this.tokenService.setToken(response.token);
             this.currentUserSubject.next(user);
           }
           return response;
@@ -53,9 +68,10 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.get(`${this.API_URL}/users/logout`).pipe(
+    return this.http.get(`${this.API_URL}/users/logout`, this.getHttpOptions()).pipe(
       tap(() => {
         localStorage.removeItem('currentUser');
+        this.tokenService.removeToken();
         this.currentUserSubject.next(null);
       }),
       catchError(this.handleError)
@@ -63,13 +79,14 @@ export class AuthService {
   }
 
   refreshToken(): Observable<any> {
-    return this.http.post<any>(`${this.API_URL}/users/refresh-token`, {})
+    return this.http.post<any>(`${this.API_URL}/users/refresh-token`, {}, this.getHttpOptions())
       .pipe(
         map(response => {
           if (response && response.token) {
             const currentUser = this.currentUserValue;
             if (currentUser) {
               currentUser.token = response.token;
+              this.tokenService.setToken(response.token);
             }
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
             this.currentUserSubject.next(currentUser);
